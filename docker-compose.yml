@@ -1,0 +1,60 @@
+version: '3'
+services:
+    nginx:
+        container_name: nginx
+        image: nginx:1.13
+        restart: always
+        ports:
+        - 80:80
+        - 443:443
+        volumes:
+        - ./nginx/conf.d:/etc/nginx/conf.d
+    
+    mysql:
+        container_name: mysql
+        image: mysql/mysql-server:5.7
+        environment:
+            MYSQL_DATABASE: db_fullstack_project
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ROOT_HOST: root
+            MYSQL_USER: root
+            MYSQL_PASSWORD: root
+        volumes:
+        - my-datavolume:/var/lib/mysql
+        ports:
+        - "3306:3306"
+        restart: always
+
+    springboot:
+        container_name : spring
+        restart : always
+        build:
+            context: backend
+            dockerfile: Dockerfile.txt
+        working_dir: /springboot
+        volumes:
+        - ./springboot:/springboot
+        - ~/.m2:/root/.m2
+        environment:
+            SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/db_fullstack_project?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&useUnicode=true
+        expose:
+        - "8080"
+        ports:
+        - "8080:8080"
+        depends_on:
+        - nginx
+        - mysql
+
+    angular:
+        container_name : angular
+        build:
+            context: frontend/angularFullstackProject
+            dockerfile: Dockerfile.txt
+        restart: always
+        ports:
+        - 4200:4200
+        depends_on:
+        - springboot
+
+volumes:     
+    my-datavolume:

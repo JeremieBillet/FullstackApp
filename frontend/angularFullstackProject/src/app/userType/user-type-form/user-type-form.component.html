@@ -1,0 +1,19 @@
+<div class="card p-3">
+    <h2 class="m-2">Formulaire UserType</h2>
+    <form (ngSubmit)="saveUserType()">
+        <div>
+
+            <!--+++ Last Name +++-->
+            <div class="form-group">
+                <label for="pName">Name : </label>
+                <input type="text" name="name" class="form-control" id="pName" [(ngModel)]="userType.name">
+            </div>
+
+            <!--bouton-->
+            <div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,17 @@
+package com.hninstitut.fullstack_devops_project.backend.dao;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.hninstitut.fullstack_devops_project.backend.entity.User;
+import com.hninstitut.fullstack_devops_project.backend.entity.UserType;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+	
+	/*---------- methode supplémentaire ---------------*/
+	public Long countByUserType(Long userTypeId);
+	
+
+}

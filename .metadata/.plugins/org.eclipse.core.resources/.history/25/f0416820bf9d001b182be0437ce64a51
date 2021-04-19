@@ -1,0 +1,31 @@
+package com.hninstitut.fullstack_devops_project.backend.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user")
+public class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private Long id;
+	
+	@Column(name="last_name")
+	private String lastName;
+	
+	@Column(name="first_name")
+	private String firstName;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="user_type_id", referencedColumnName = "id")
+	private UserType userType;
+}

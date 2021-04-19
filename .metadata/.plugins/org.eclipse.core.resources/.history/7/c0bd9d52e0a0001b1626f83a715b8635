@@ -1,0 +1,9 @@
+package com.hninstitut.fullstack_devops_project.backend.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.hninstitut.fullstack_devops_project.backend.entity.User;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+}

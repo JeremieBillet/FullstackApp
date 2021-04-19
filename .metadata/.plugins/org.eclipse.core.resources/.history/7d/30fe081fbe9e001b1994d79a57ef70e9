@@ -1,0 +1,5 @@
+package com.hninstitut.fullstack_devops_project.backend.web_services;
+
+public class UserTypeRest {
+
+}

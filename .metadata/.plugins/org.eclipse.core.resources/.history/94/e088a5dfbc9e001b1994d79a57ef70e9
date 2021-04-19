@@ -1,0 +1,46 @@
+package com.hninstitut.fullstack_devops_project.backend.web_services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hninstitut.fullstack_devops_project.backend.dao.UserRepository;
+import com.hninstitut.fullstack_devops_project.backend.entity.User;
+
+@CrossOrigin(value="http://localhost:4200")
+@RestController
+@RequestMapping(value="users")
+public class UserRest {
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	public void setUserRepository(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+	
+	
+	/*--------- méthode à exposer ------------- */
+	@GetMapping()
+	public List<User> getAllUser(){
+		return userRepository.findAll();
+	}
+	
+	@GetMapping(value = "/{id}")
+	public User getUserById(@PathVariable("id") Long id) {
+		 User user = null;
+		 Optional<User> optUser = userRepository.findById(id);
+		 
+		 if (optUser.isPresent()) user = optUser.get();
+		
+		return 	user;
+	}
+	
+
+}

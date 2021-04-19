@@ -1,0 +1,30 @@
+<div class="p-3">
+
+    <button class="btn btn-primary m-3" (click)="newUserType()" >Add User Type</button>
+
+    <div *ngIf="errorStatus==401" class="alert alert-warning">
+        {{errorMessage}}
+    </div>
+
+    <table datatable [dtTrigger]="dtTrigger" class="row-border hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th></th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let type of userTypes">
+                <td>{{type.id}}</td>
+                <td>{{type.name}}</td>
+                <td>
+                    <button class="btn btn-primary mx-3" (click)="updateUserType(type.id)">Update</button>
+                    <button class="btn btn-danger mx-3" (click)="deleteUserType(type.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
